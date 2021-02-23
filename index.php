@@ -22,22 +22,48 @@
 
 // TODO Votre code ici bas.
 
+    $server = 'localhost';
+    $user = 'root';
+    $password = '';
+    $db = '';
+
+/**
+ * Supprimer la bdd
+ */
 try {
-    $maConnexion = ........
+    $maConnexion = new PDO("mysql:host=$server;dbname=$db;charset=utf8", $user, $password);
 
-    $request = "
-        Ma super requête SQL pour créer une base de données.
-    ";
 
-    $maConnexion->une super méthode pour exécuter ma requete
+    $maConnexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    echo "La base de données intro_sql a bien été créée.";
+    $sql = "DROP DATABASE intro_sql";
+
+    $maConnexion->exec($sql);
+
+    echo "La base de données intro_sql a bien été supprimer.";
 }
 catch (PDOException $exception) {
     echo $exception->getMessage();
 }
 
+/**
+ * Creation de la bdd
+ */
+try {
+    $maConnexion = new PDO("mysql:host=$server;dbname=$db;charset=utf8", $user, $password);
 
+
+    $maConnexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    $sql = "CREATE DATABASE intro_sql";
+
+    $maConnexion->exec($sql);
+
+    echo "La base de données intro_sql a bien été crée.";
+}
+catch (PDOException $exception) {
+    echo $exception->getMessage();
+}
 
 
 
